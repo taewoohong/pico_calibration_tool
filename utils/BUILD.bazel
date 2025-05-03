@@ -1,0 +1,7 @@
+cc_binary(
+  name = "util_functions",
+  deps = [
+  "//third_party/librealsense2:libreasense2",
+  "//third_party/opencv4:opencv4",
+  ],
+)
