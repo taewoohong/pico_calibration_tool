@@ -1,0 +1,9 @@
+cc_binary(
+  name = "extract_intrinsic",
+  srcs = ["extract_intrinsic.cpp"],
+  deps = [
+    "//third_party/librealsense2:librealsense2",
+    "//third_party/opencv4/opencv4",
+  ],
+)
+
