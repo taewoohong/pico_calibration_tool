@@ -4,5 +4,6 @@ cc_binary(
   deps = [
     "//third_party/librealsense2:librealsense2",
     "//third_party/opencv4:opencv4",
+    "//utils:util_functions",
   ],
 )
