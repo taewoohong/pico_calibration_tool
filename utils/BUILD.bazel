@@ -1,7 +1,9 @@
-cc_binary(
+cc_library(
   name = "util_functions",
+  hdrs = ["cv_helper.hpp"],
   deps = [
-  "//third_party/librealsense2:libreasense2",
-  "//third_party/opencv4:opencv4",
+    "//third_party/librealsense2:librealsense2",
+    "//third_party/opencv4:opencv4",
   ],
+  visibility = ["//visibility:public"],
 )
