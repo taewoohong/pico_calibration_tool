@@ -1,0 +1,12 @@
+cc_library(
+  name = "loop_control",
+  hdrs = ["loop_control.hpp"],
+  srcs = ["loop_control.cpp"],
+  deps = [
+    "//third_party/librealsense2:librealsense2",
+    "//third_party/opencv4:opencv4",
+    "//utils:util_functions",
+    "//src/capture_loops:capture_loops",
+  ],
+  visibility = ["//visibility:public"],
+)

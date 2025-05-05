@@ -1,0 +1,10 @@
+cc_library(
+  name = "handle_ui",
+  srcs = ["handle_ui.cpp"],
+  hdrs = ["handle_ui.hpp"],
+  deps = [
+    "//utils:util_functions",
+    "//third_party/opencv4:opencv4",
+  ],
+  visibility = ["//visibility:public"],
+)

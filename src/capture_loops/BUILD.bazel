@@ -1,10 +1,9 @@
 cc_library(
-  name = "util_functions",
-  hdrs = [
-    "cv_helper.hpp",
-    "app_state.hpp",
-  ],
+  name = "capture_loops",
+  srcs = ["capture_loops.cpp"],
+  hdrs = ["capture_loops.hpp"],
   deps = [
+    "//utils:util_functions",
     "//third_party/librealsense2:librealsense2",
     "//third_party/opencv4:opencv4",
   ],
