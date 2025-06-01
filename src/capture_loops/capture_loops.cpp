@@ -32,7 +32,7 @@ void ir_loop(rs2::pipeline& pipe) {
   return;
 }
 
-void ir_and_color_loop(rs2::pipeline& pipe) {
+void ir_and_color_loop(const rs2::pipeline& pipe, const cv::Mat& map_x, const cv::Mat& map_y) {
   while(curr_state.selected_mode.load() == SelectedMode::Both) {
     rs2::frameset frames = pipe.wait_for_frames();
     rs2::frame ir_frame = frames.get_infrared_frame();
@@ -40,19 +40,20 @@ void ir_and_color_loop(rs2::pipeline& pipe) {
     cv::Mat ir_mat = frame_to_mat(ir_frame);
     cv::Mat color_mat = frame_to_mat(color_frame);
     cv::Mat binary;
-    double threshhold_value = 100;
-    cv::threshold(ir_mat, binary, threshhold_value, 255, cv::THRESH_BINARY);
-    
-    cv::Mat binary_bgr;
-    cv::cvtColor(binary, binary_bgr, cv::COLOR_GRAY2BGR);
+    double threshold_value = 100;
+    cv::threshold(ir_mat, binary, threshold_value, 255, cv::THRESH_BINARY);
 
-    cv::Mat red_overlay = cv::Mat::zeros(binary_bgr.size(), CV_8UC3);
-    red_overlay.setTo(cv::Scalar(0, 0, 255), binary);  // BGR: (Blue=0, Green=0, Red=255)
+// Remap IR binary mask to align with color image
+    cv::Mat remapped_ir_mask;
+    cv::remap(binary, remapped_ir_mask, map_x, map_y, cv::INTER_NEAREST, cv::BORDER_CONSTANT, 0);
+
+// Overlay red on color image where remapped IR is active
+    cv::Mat red_overlay = cv::Mat::zeros(color_mat.size(), CV_8UC3);
+    red_overlay.setTo(cv::Scalar(0, 0, 255), remapped_ir_mask);
+    red_overlay.copyTo(color_mat, remapped_ir_mask);  // BGR: (Blue=0, Green=0, Red=255)
 
     // Blend red overlay with color frame
-    cv::Mat blended;
-    cv::addWeighted(color_mat, 1.0, red_overlay, 1.0, 0, blended);
-    cv::putText(blended, "Selected Mode: Both", cv::Point(10, 30), cv::FONT_HERSHEY_COMPLEX, 1, cv::Scalar(255, 0, 0), 2);
-    cv::imshow("Calibration Tool", blended);
+    cv::putText(color_mat, "Selected Mode: Both", cv::Point(10, 30), cv::FONT_HERSHEY_COMPLEX, 1, cv::Scalar(255, 0, 0), 2);
+    cv::imshow("Calibration Tool", color_mat);
   }
 }

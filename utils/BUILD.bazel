@@ -4,6 +4,9 @@ cc_library(
     "cv_helper.hpp",
     "app_state.hpp",
   ],
+  srcs = [
+    "cv_helper.cpp",
+  ],
   deps = [
     "//third_party/librealsense2:librealsense2",
     "//third_party/opencv4:opencv4",
