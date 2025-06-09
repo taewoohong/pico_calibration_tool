@@ -33,24 +33,35 @@ void ir_loop(rs2::pipeline& pipe) {
   return;
 }
 
-void ir_enhance_loop(rs2::pipeline &pipe){
-  while(curr_state.selected_mode.load() == SelectedMode::Infrared_Enhanced) {
+void ir_enhance_loop(rs2::pipeline &pipe) {
+  while (curr_state.selected_mode.load() == SelectedMode::Infrared_Enhanced) {
     rs2::frameset frames = pipe.wait_for_frames();
     rs2::frame ir_frame = frames.get_infrared_frame();
-    cv::Mat ir_mat = frame_to_mat(ir_frame);
+    cv::Mat ir_mat = frame_to_mat(ir_frame); // grayscale
+
+    // Threshold to get binary mask
     cv::Mat binary;
     double threshold_value = 125;
     cv::threshold(ir_mat, binary, threshold_value, 255, cv::THRESH_BINARY);
-    
-    cv::Mat red_overlay = cv::Mat::zeros(ir_mat.size(), CV_8UC3);
-    red_overlay.setTo(cv::Scalar(0, 255, 255), binary);
-    red_overlay.copyTo(ir_mat, binary);
 
-    cv::putText(ir_mat, "Selected Mode: Enhanced IR", cv::Point(10, 30), cv::FONT_HERSHEY_COMPLEX, 1, 255, 0, 0);
+    // Convert IR grayscale image to BGR so we can overlay color
+    cv::Mat ir_bgr;
+    cv::cvtColor(ir_mat, ir_bgr, cv::COLOR_GRAY2BGR);
 
-    cv::imshow("Calibration Tool", ir_mat);
+    // Set red pixels where binary is white (i.e., above threshold)
+    // (B, G, R) = (0, 0, 255)
+    ir_bgr.setTo(cv::Scalar(0, 0, 255), binary);
+
+    // Add overlay text
+    cv::putText(ir_bgr, "Selected Mode: Enhanced IR", cv::Point(10, 30),
+                cv::FONT_HERSHEY_COMPLEX, 1.0, cv::Scalar(255, 255, 255), 2);
+
+    // Show result
+    cv::imshow("Calibration Tool", ir_bgr);
   }
+  return;
 }
+
 
 //void ir_and_color_loop(const rs2::pipeline& pipe, const cv::Mat& map_x, const cv::Mat& map_y) {
 //  while(curr_state.selected_mode.load() == SelectedMode::Both) {
