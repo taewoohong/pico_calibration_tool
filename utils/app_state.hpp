@@ -5,8 +5,9 @@
 
 enum class SelectedMode {
   Infrared,
+  Infrared_Enhanced,
   Color,
-  Both,
+  //Both,
   Kill,
 };
 

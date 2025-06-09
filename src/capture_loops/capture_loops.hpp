@@ -6,6 +6,7 @@
 
 void color_loop(rs2::pipeline& pipe);
 void ir_loop(rs2::pipeline& pipe);
-void ir_and_color_loop(const rs2::pipeline& pipe, const cv::Mat& map_x, const cv::Mat& map_y);
+void ir_enhance_loop(rs2::pipeline& pipe);
+//void ir_and_color_loop(const rs2::pipeline& pipe, const cv::Mat& map_x, const cv::Mat& map_y);
 
 #endif

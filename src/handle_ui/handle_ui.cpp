@@ -20,7 +20,7 @@ void HandleUserInterface() {
         curr_state.selected_mode.store(SelectedMode::Infrared);
         break;
       case '3':
-        curr_state.selected_mode.store(SelectedMode::Both);
+        curr_state.selected_mode.store(SelectedMode::Infrared_Enhanced);
         break;
       case 'q':
         curr_state.selected_mode.store(SelectedMode::Kill);
