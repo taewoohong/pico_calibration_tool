@@ -5,5 +5,7 @@ cc_binary(
     "//third_party/librealsense2:librealsense2",
     "//third_party/opencv4:opencv4",
     "//utils:util_functions",
+    "//src/handle_ui:handle_ui",
+    "//src/loop_control:loop_control",
   ],
 )
