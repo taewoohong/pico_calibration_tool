@@ -40,8 +40,11 @@ void intialize_loop() {
       case SelectedMode::Infrared:
         ir_loop(pipe);
         break;
-      case SelectedMode::Both:
+      /* case SelectedMode::Both:
         ir_and_color_loop(pipe, map_x, map_y);
+        break; */
+      case SelectedMode::Infrared_Enhanced:
+        ir_enhance_loop(pipe);
         break;
       default:
         std::cout << "In default loop" << std::endl;
