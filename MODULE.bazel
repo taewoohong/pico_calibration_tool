@@ -1,12 +1,19 @@
 module(
   name = "pico_calibration_tool",
-  version = "0.1.0",
+  version = "0.1.1",
 )
 
-bazel_dep(name = "rules_cc", version = "0.0.17")
+bazel_dep(name = "rules_cc", version = "0.1.1")
 bazel_dep(name = "hedron_compile_commands", dev_dependency = True)
+bazel_dep(name = "opencv", version = "4.11.0.bcr.1")
 
-local_path_override(
+git_override(
   module_name = "hedron_compile_commands",
-  path = "/home/taho/dev/bazel-compile-commands-extractor",
+  remote = "https://github.com/hedronvision/bazel-compile-commands-extractor.git",
+  commit = "4f28899228fb3ad0126897876f147ca15026151e",
 )
+
+#local_path_override(
+#  module_name = "hedron_compile_commands",
+#path = "/home/taho/dev/bazel-compile-commands-extractor",
+#)

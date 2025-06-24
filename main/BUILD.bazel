@@ -3,7 +3,7 @@ cc_binary(
   srcs = ["main.cpp"],
   deps = [
     "//third_party/librealsense2:librealsense2",
-    "//third_party/opencv4:opencv4",
+    "@rules_cc//:opencv",
     "//utils:util_functions",
     "//src/handle_ui:handle_ui",
     "//src/loop_control:loop_control",
