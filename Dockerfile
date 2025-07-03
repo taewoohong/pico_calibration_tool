@@ -36,7 +36,8 @@ RUN git clone https://github.com/opencv/opencv.git &&\
           -DCMAKE_INSTALL_PREFIX=/opencv &&\
     make -j$(nproc) && make DESTDIR=/opt/picoscan_tool/sysroot install &&\
     curl -o /home/bazelisk.deb -L https://github.com/bazelbuild/bazelisk/releases/download/v1.26.0/bazelisk-amd64.deb &&\
-    dpkg -i /home/bazelisk.deb
+    dpkg -i /home/bazelisk.deb && \
+    bazel --version
 
 
 WORKDIR /workspace

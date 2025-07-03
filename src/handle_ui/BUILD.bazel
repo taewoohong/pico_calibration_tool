@@ -4,7 +4,7 @@ cc_library(
   hdrs = ["handle_ui.hpp"],
   deps = [
     "//utils:util_functions",
-    "//third_party/opencv4:opencv4",
+    "@opencv",
   ],
   visibility = ["//visibility:public"],
 )

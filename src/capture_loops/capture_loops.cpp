@@ -7,9 +7,9 @@
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
 #include <librealsense2/rs.hpp>
-#include <opencv4/opencv2/core/types.hpp>
-#include <opencv4/opencv2/imgproc.hpp>
-#include <opencv4/opencv2/opencv.hpp>
+#include <opencv2/core/types.hpp>
+#include <opencv2/imgproc.hpp>
+#include <opencv2/opencv.hpp>
 
 void color_loop(rs2::pipeline& pipe) {
   while(curr_state.selected_mode.load() == SelectedMode::Color) {

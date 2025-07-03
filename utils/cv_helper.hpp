@@ -3,8 +3,8 @@
 #include <librealsense2/rs.hpp> // Include RealSense Cross Platform API
 #include <opencv2/opencv.hpp>   // Include OpenCV API
 #include <exception>
-#include <eigen3/Eigen/Dense>
-#include <opencv4/opencv2/core/mat.hpp>
+//#include <eigen3/Eigen/Dense>
+#include <opencv2/core/mat.hpp>
 #include <utility>
 // Convert rs2::frame to cv::Mat
 //

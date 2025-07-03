@@ -2,8 +2,6 @@ cc_binary(
   name = "picoscan_calibration_tool",
   srcs = ["main.cpp"],
   deps = [
-    "//third_party/librealsense2:librealsense2",
-    "@rules_cc//:opencv",
     "//utils:util_functions",
     "//src/handle_ui:handle_ui",
     "//src/loop_control:loop_control",

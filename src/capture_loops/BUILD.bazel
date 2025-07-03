@@ -4,8 +4,8 @@ cc_library(
   hdrs = ["capture_loops.hpp"],
   deps = [
     "//utils:util_functions",
-    "//third_party/librealsense2:librealsense2",
-    "//third_party/opencv4:opencv4",
+    "@realsense",
+    "@opencv",
   ],
   visibility = ["//visibility:public"],
 )

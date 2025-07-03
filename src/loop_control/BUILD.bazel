@@ -3,8 +3,8 @@ cc_library(
   hdrs = ["loop_control.hpp"],
   srcs = ["loop_control.cpp"],
   deps = [
-    "//third_party/librealsense2:librealsense2",
-    "//third_party/opencv4:opencv4",
+    "@realsense",
+    "@opencv",
     "//utils:util_functions",
     "//src/capture_loops:capture_loops",
   ],

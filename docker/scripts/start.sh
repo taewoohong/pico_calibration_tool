@@ -1,5 +1,7 @@
 #!/bin/bash
 
+docker build -t test .
+
 docker run -it --rm \
   --device=/dev/video0 \
   --device=/dev/bus/usb/ \

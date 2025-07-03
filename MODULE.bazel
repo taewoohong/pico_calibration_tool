@@ -5,23 +5,24 @@ module(
 
 bazel_dep(name = "rules_cc", version = "0.1.1")
 bazel_dep(name = "hedron_compile_commands", dev_dependency = True)
-bazel_dep(name = "opencv", version = "4.11.0.bcr.1")
-load("@bazel//tools/build_defs/repo:local.bzl", "new_local_repository")
+bazel_dep(name = "eigen", version = "4.0.0-20241125.bcr.2")
+#bazel_dep(name = "opencv", version = "4.11.0.bcr.1")
 
 git_override(
   module_name = "hedron_compile_commands",
   remote = "https://github.com/hedronvision/bazel-compile-commands-extractor.git",
   commit = "4f28899228fb3ad0126897876f147ca15026151e",
 )
+new_local_repository = use_repo_rule("@bazel_tools//tools/build_defs/repo:local.bzl", "new_local_repository")
 
-local_repository(
+new_local_repository(
   name = "realsense",
-  path = "/usr/include/librealsense2/",
-  build_file = "//third_party/realsense"
+  path = "/usr/include",
+  build_file = "//third_party/realsense:BUILD.bazel"
 )
 
-local_repository(
+new_local_repository(
   name = "opencv",
-  path = "/opt/picoscan_tool/opencv/opencv4/",
-  build_file = "//third_party/opencv/",
+  path = "/opt/picoscan_tool/sysroot/opencv",
+  build_file = "//third_party/opencv:BUILD.bazel",
 )

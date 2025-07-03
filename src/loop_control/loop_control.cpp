@@ -5,7 +5,7 @@
 #include <librealsense2/rs.hpp>
 #include <opencv2/core.hpp>
 #include <iostream>
-#include <opencv4/opencv2/highgui.hpp>
+#include <opencv2/highgui.hpp>
 
 #include "utils/cv_helper.hpp"
 #include "utils/app_state.hpp"
