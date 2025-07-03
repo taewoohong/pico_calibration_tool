@@ -1,0 +1,16 @@
+package(default_visibility = ["//visibility:public"])
+
+cc_library(
+  name = "opencv",
+  hdrs = glob([
+    "**/*.h",
+    "**/*.hpp",
+  ]),
+  includes = ["include/opencv4"],
+  linkopts = [
+    "-L/opt/picoscan_tool/sysroot/opencv/lib",
+    "-lopencv_core",
+    "-lopencv_imgproc",
+    "-lopencv_highgui",
+  ],
+)

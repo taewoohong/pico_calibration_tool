@@ -1,0 +1,10 @@
+package(default_visibility = ["//visibility:public"])
+
+cc_library(
+  name = "realsense",
+  hdrs = glob(["librealsense2/**"]),
+  includes = ["."],
+  linkopts = [
+    "-lrealsense2",
+  ],
+)
