@@ -39,6 +39,7 @@ RUN git clone https://github.com/opencv/opencv.git &&\
     dpkg -i /home/bazelisk.deb && \
     bazel --version
 
+ENV LD_LIBRARY_PATH=/opt/picoscan_tool/sysroot/opencv/lib:$LD_LIBRARY_PATH
 
 WORKDIR /workspace
 COPY . .
