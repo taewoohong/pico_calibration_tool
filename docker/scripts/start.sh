@@ -2,6 +2,8 @@
 
 docker build -t test .
 
+xhost +local:root
+
 docker run -it --rm \
   --device=/dev/video0 \
   --device=/dev/bus/usb/ \

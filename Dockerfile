@@ -37,9 +37,9 @@ RUN git clone https://github.com/opencv/opencv.git &&\
     make -j$(nproc) && make DESTDIR=/opt/picoscan_tool/sysroot install &&\
     curl -o /home/bazelisk.deb -L https://github.com/bazelbuild/bazelisk/releases/download/v1.26.0/bazelisk-amd64.deb &&\
     dpkg -i /home/bazelisk.deb && \
-    bazel --version
+    bazel build //main:picoscan_calibration_tool
 
-ENV LD_LIBRARY_PATH=/opt/picoscan_tool/sysroot/opencv/lib:$LD_LIBRARY_PATH
+ENV LD_LIBRARY_PATH=/opt/picoscan_tool/sysroot/opencv/lib:${LD_LIBRARY_PATH}
 
 WORKDIR /workspace
 COPY . .

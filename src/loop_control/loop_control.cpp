@@ -23,7 +23,12 @@ void intialize_loop() {
 
   //disable laser
   auto depth_sensor = selection.get_device().first<rs2::depth_sensor>();
-  depth_sensor.set_option(RS2_OPTION_LASER_POWER, 0.f);
+  if (depth_sensor.supports(RS2_OPTION_EMITTER_ENABLED)) {
+    depth_sensor.set_option(RS2_OPTION_LASER_POWER, 0.f);
+  }
+  else {
+    depth_sensor.set_option(RS2_OPTION_LASER_POWER, 0.f);
+  }
 
   //disable auto exposure
   auto sensor = selection.get_device().first<rs2::sensor>();
