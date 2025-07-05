@@ -9,6 +9,7 @@
 
 void HandleUserInterface() {
   cv::namedWindow("Calibration Tool", cv::WINDOW_NORMAL);
+  cv::createTrackbar("threshold", "Calibration Tool", reinterpret_cast<int*>(&curr_state.ir_threshold), 255);
   while(curr_state.selected_mode != SelectedMode::Kill) {
     std::this_thread::sleep_for(std::chrono::milliseconds(1));
     char input = cv::waitKey(1);

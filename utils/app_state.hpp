@@ -13,6 +13,7 @@ enum class SelectedMode {
 
 struct AppMode {
   std::atomic<SelectedMode> selected_mode {SelectedMode::Color};
+  std::atomic<int> ir_threshold = 125;
 };
 
 extern AppMode curr_state;

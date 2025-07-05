@@ -41,7 +41,7 @@ void ir_enhance_loop(rs2::pipeline &pipe) {
 
     // Threshold to get binary mask
     cv::Mat binary;
-    double threshold_value = 125;
+    double threshold_value = curr_state.ir_threshold.load();
     cv::threshold(ir_mat, binary, threshold_value, 255, cv::THRESH_BINARY);
 
     // Convert IR grayscale image to BGR so we can overlay color
