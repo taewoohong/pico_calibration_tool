@@ -33,23 +33,26 @@ void intialize_loop() {
   //disable auto exposure
   auto sensor = selection.get_device().first<rs2::sensor>();
   sensor.set_option(RS2_OPTION_ENABLE_AUTO_EXPOSURE, 0.f);
+  //set the exposure level to 20000 by default//
   sensor.set_option(RS2_OPTION_EXPOSURE, 20000.f);
   cv::Mat map_x, map_y;
   std::tie(map_x, map_y) = compute_remap_maps(1280, 720); 
 
   while(curr_state.selected_mode.load() != SelectedMode::Kill) {
+    sensor.set_option(RS2_OPTION_EXPOSURE, curr_state.exposure.load());
     switch (curr_state.selected_mode.load()) {
       case SelectedMode::Color:
         color_loop(pipe);
         break;
       case SelectedMode::Infrared:
-        ir_loop(pipe);
+        ir_loop(pipe, sensor);
         break;
+      //adds complexity for little value, may add later//
       /* case SelectedMode::Both:
         ir_and_color_loop(pipe, map_x, map_y);
         break; */
       case SelectedMode::Infrared_Enhanced:
-        ir_enhance_loop(pipe);
+        ir_enhance_loop(pipe, sensor);
         break;
       default:
         std::cout << "In default loop" << std::endl;

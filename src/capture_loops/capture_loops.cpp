@@ -2,8 +2,10 @@
 #include "utils/cv_helper.hpp"
 #include "capture_loops.hpp"
 
+#include <librealsense2/h/rs_option.h>
 #include <librealsense2/hpp/rs_context.hpp>
 #include <librealsense2/hpp/rs_frame.hpp>
+#include <librealsense2/hpp/rs_pipeline.hpp>
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
 #include <librealsense2/rs.hpp>
@@ -22,7 +24,7 @@ void color_loop(rs2::pipeline& pipe) {
   return;
 }
 
-void ir_loop(rs2::pipeline& pipe) {
+void ir_loop(rs2::pipeline& pipe, rs2::sensor& exposure_option) {
   while(curr_state.selected_mode.load() == SelectedMode::Infrared) {
     rs2::frameset frames = pipe.wait_for_frames();
     rs2::frame ir_frame = frames.get_infrared_frame();
@@ -33,8 +35,9 @@ void ir_loop(rs2::pipeline& pipe) {
   return;
 }
 
-void ir_enhance_loop(rs2::pipeline &pipe) {
+void ir_enhance_loop(rs2::pipeline& pipe, rs2::sensor& exposure_option) {
   while (curr_state.selected_mode.load() == SelectedMode::Infrared_Enhanced) {
+    //exposure_option.set_option(RS2_OPTION_EXPOSURE, curr_state.exposure.load());
     rs2::frameset frames = pipe.wait_for_frames();
     rs2::frame ir_frame = frames.get_infrared_frame();
     cv::Mat ir_mat = frame_to_mat(ir_frame); // grayscale
@@ -62,7 +65,7 @@ void ir_enhance_loop(rs2::pipeline &pipe) {
   return;
 }
 
-
+//may implement this later//
 //void ir_and_color_loop(const rs2::pipeline& pipe, const cv::Mat& map_x, const cv::Mat& map_y) {
 //  while(curr_state.selected_mode.load() == SelectedMode::Both) {
 //    rs2::frameset frames = pipe.wait_for_frames();
